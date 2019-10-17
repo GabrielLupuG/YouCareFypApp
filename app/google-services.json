@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1039220887243",
+    "firebase_url": "https://youcarefypapp.firebaseio.com",
+    "project_id": "youcarefypapp",
+    "storage_bucket": "youcarefypapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1039220887243:android:86a1d9e8be335f7192154e",
+        "android_client_info": {
+          "package_name": "com.example.youcarefypapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1039220887243-0nnqafcmom31200estlfuct0t928jmc6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByYQyWyS3UiNlA2Pmg0hE_1BNTV-128I8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1039220887243-0nnqafcmom31200estlfuct0t928jmc6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
