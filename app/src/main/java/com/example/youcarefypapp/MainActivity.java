@@ -28,19 +28,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
         FirebaseAuth = FirebaseAuth.getInstance();
         emailId = findViewById(R.id.email);
         password = findViewById(R.id.password);
         btnSignUp = findViewById(R.id.registerBtn);
         tvSignIn = findViewById(R.id.loginBtn);
         send_text = (EditText) findViewById(R.id.email);
-
         btnSignUp.setOnClickListener(new View.OnClickListener() {
 
+
             @Override
+            //on click to verify if email and password are added
             public void onClick(View v) {
                 String email = emailId.getText().toString();
                 String pwd = password.getText().toString();
@@ -65,9 +63,12 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(!task.isSuccessful()){
+                                //error message
                                 Toast.makeText(MainActivity.this,"SignUp Unsuccessful, Please Try Again",Toast.LENGTH_SHORT).show();
                             }
                             else {
+
+                                //code to create user profile in home activity
                                 startActivity(new Intent(MainActivity.this,HomeActivity.class));
 
 
@@ -78,9 +79,7 @@ public class MainActivity extends AppCompatActivity {
                                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                                 // now by putExtra method put the value in key, value pair
                                 // key is message_key by this key we will receive the value, and put the string
-
                                 intent.putExtra("message_key", str);
-
                                 // start the Intent
                                 startActivity(intent);
 
@@ -89,12 +88,15 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
                 else{
+                    //toast error if any error occurred
                     Toast.makeText(MainActivity.this,"Error Occurred!",Toast.LENGTH_SHORT).show();
 
                 }
             }
         });
 
+
+        //it go to log in page by clicking on login activity button
         tvSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -68,7 +68,7 @@
         android:layout_marginStart="163dp"
         android:layout_marginEnd="163dp"
         android:layout_marginBottom="140dp"
-        android:text="Login Here"
+        android:text="Already create an account?     Please Login Here"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -124,7 +124,7 @@
         android:layout_width="127dp"
         android:layout_height="76dp"
         android:adjustViewBounds="false"
-        android:background="#2B2B2B"
+        android:background="@drawable/logo"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
