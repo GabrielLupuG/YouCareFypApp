@@ -18,8 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
     EditText emailId, password;
-    Button btnSignUp;
-    TextView tvSignIn;
+    Button btnRegister;
+    TextView btnLogin;
     FirebaseAuth FirebaseAuth;
     EditText send_text;
 
@@ -31,12 +31,13 @@ public class MainActivity extends AppCompatActivity {
         FirebaseAuth = FirebaseAuth.getInstance();
         emailId = findViewById(R.id.email);
         password = findViewById(R.id.password);
-        btnSignUp = findViewById(R.id.registerBtn);
-        tvSignIn = findViewById(R.id.loginBtn);
+        btnRegister = findViewById(R.id.registerBtn);
+        btnLogin = findViewById(R.id.loginBtn);
         send_text = (EditText) findViewById(R.id.email);
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
 
 
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             //on click to verify if email and password are added
             public void onClick(View v) {
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //it go to log in page by clicking on login activity button
-        tvSignIn.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this,LoginActivity.class);

@@ -21,6 +21,8 @@ public class LoginActivity extends AppCompatActivity { EditText emailId, passwor
     Button btnSignIn;
     TextView tvSignUp;
     FirebaseAuth FirebaseAuth;
+    EditText send_text;
+
     private FirebaseAuth.AuthStateListener AuthStateListener;
 
     @Override
@@ -33,6 +35,7 @@ public class LoginActivity extends AppCompatActivity { EditText emailId, passwor
         password = findViewById(R.id.password);
         btnSignIn = findViewById(R.id.registerBtn);
         tvSignUp = findViewById(R.id.loginBtn);
+        send_text = (EditText) findViewById(R.id.email);
 
         AuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -44,7 +47,7 @@ public class LoginActivity extends AppCompatActivity { EditText emailId, passwor
                     startActivity(i);
                 }
                 else{
-                    Toast.makeText(LoginActivity.this,"Please Login",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"Please Log in",Toast.LENGTH_SHORT).show();
                 }
             }
         };
@@ -76,6 +79,22 @@ public class LoginActivity extends AppCompatActivity { EditText emailId, passwor
                             else{
                                 Intent intToHome = new Intent(LoginActivity.this,HomeActivity.class);
                                 startActivity(intToHome);
+
+
+
+                                // get the value which input by user in EditText
+                                // and convert it to string
+                                String str = send_text.getText().toString();
+                                // Create the Intent object of this class Context() to Second_activity class
+                                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                                // now by putExtra method put the value in key, value pair
+                                // key is message_key by this key we will receive the value, and put the string
+                                intent.putExtra("message_key", str);
+                                // start the Intent
+                                startActivity(intent);
+
+
+
                             }
                         }
                     });
