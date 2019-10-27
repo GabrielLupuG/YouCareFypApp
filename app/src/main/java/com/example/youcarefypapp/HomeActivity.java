@@ -24,6 +24,10 @@ public class HomeActivity extends AppCompatActivity {
 
     DatabaseReference databaseRef;
 
+
+    //new line
+    //FirebaseDatabase database;
+
     AddPatient addPatient;
 
 
@@ -46,7 +50,15 @@ public class HomeActivity extends AppCompatActivity {
 
         addPatient = new AddPatient();
         //reference to AddPatient class
+
+
+
+
+
+
+//FirebaseDatabase databaseRef= FirebaseDatabase.getInstance();
         databaseRef= FirebaseDatabase.getInstance().getReference().child("AddPatient");
+        //databaseRef.setValue("hello");
 
 
 
@@ -85,6 +97,8 @@ public class HomeActivity extends AppCompatActivity {
                 addPatient.setDateBirth(dateOfB);
                 addPatient.setPhone(phoneN);
                 addPatient.setAddress(address);
+
+
 
                 databaseRef.push().setValue(addPatient);
                 Toast.makeText(HomeActivity.this, "Data insert successfully!", Toast.LENGTH_SHORT).show();
