@@ -7,11 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,7 +19,6 @@ public class DeleteAccount extends AppCompatActivity {
 
     TextView userEm;
     Button delet, home;
-
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
 
@@ -34,15 +31,9 @@ public class DeleteAccount extends AppCompatActivity {
         userEm= findViewById(R.id.userEmail);
         delet= findViewById(R.id.deleteAcc);
         home = findViewById(R.id.homaPage);
-
-
-
         firebaseAuth = FirebaseAuth.getInstance();
-       firebaseUser = firebaseAuth.getCurrentUser();
-
-       userEm.setText(firebaseUser.getEmail());
-
-
+        firebaseUser = firebaseAuth.getCurrentUser();
+        userEm.setText(firebaseUser.getEmail());
 
 
         home.setOnClickListener(new View.OnClickListener() {
@@ -52,8 +43,6 @@ public class DeleteAccount extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-
 
 
         delet.setOnClickListener(new View.OnClickListener() {
@@ -82,9 +71,10 @@ public class DeleteAccount extends AppCompatActivity {
                                 }
                             }
                         });
-
                     }
                 });
+
+
                 dialog.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

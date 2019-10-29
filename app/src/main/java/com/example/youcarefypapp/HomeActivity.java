@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -24,18 +23,12 @@ public class HomeActivity extends AppCompatActivity {
     Button delete;
     FirebaseAuth FirebaseAuth;
     EditText namePatient, dateBirthPatient, phonePatient, addressPatient;
-
     DatabaseReference databaseRef;
-
     ProgressBar progressBar;
-
     AddPatient addPatient;
 
-
-    FirebaseAuth firebaseAuth;
-    FirebaseUser firebaseUser;
-
-
+//    FirebaseAuth firebaseAuth;
+//    FirebaseUser firebaseUser;
 
     private FirebaseAuth.AuthStateListener AuthStateListener;
 
@@ -48,37 +41,16 @@ public class HomeActivity extends AppCompatActivity {
         btnLogout = findViewById(R.id.logout);
         btnSave = findViewById(R.id.save);
         delete = findViewById(R.id.deleteAcc);
-
         namePatient = findViewById(R.id.nameP);
         dateBirthPatient = findViewById(R.id.dateBirthP);
         phonePatient = findViewById(R.id.phoneP);
         addressPatient = findViewById(R.id.addressP);
-
-///////////////////
-
-////        firebaseAuth = FirebaseAuth.getInstance();
-//        firebaseUser = FirebaseAuth.getCurrentUser();
-////
-////
-//        receiver_msg.setText(firebaseUser.getEmail());
-////        //nameP
-
-
-
         progressBar = findViewById(R.id.progressBar);
 
         addPatient = new AddPatient();
         //reference to AddPatient class
 
-
-
-
-
-
-//FirebaseDatabase databaseRef= FirebaseDatabase.getInstance();
         databaseRef= FirebaseDatabase.getInstance().getReference().child("AddPatient");
-        //databaseRef.setValue("hello");
-
 
 
         receiver_msg = (TextView) findViewById(R.id.received_value_id);
@@ -89,7 +61,6 @@ public class HomeActivity extends AppCompatActivity {
         String str = intent.getStringExtra("message_key");
         // display the string into textView
         receiver_msg.setText(str);
-
 
 
 //logout button which is opening home activity page
@@ -104,7 +75,6 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
-
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +83,6 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
 
 
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +101,6 @@ public class HomeActivity extends AppCompatActivity {
                 addPatient.setDateBirth(dateOfB);
                 addPatient.setPhone(phoneN);
                 addPatient.setAddress(address);
-
 
 
                 databaseRef.push().setValue(addPatient);
@@ -171,10 +139,6 @@ public class HomeActivity extends AppCompatActivity {
 //                }
             }
         });
-
-
-
-
 
     }
 }

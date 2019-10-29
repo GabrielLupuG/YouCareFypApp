@@ -8,10 +8,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -23,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     TextView btnLogin;
     FirebaseAuth FirebaseAuth;
     EditText send_text;
-
     ProgressBar progressBar;
 
     @Override
@@ -37,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.registerBtn);
         btnLogin = findViewById(R.id.loginBtn);
         send_text = (EditText) findViewById(R.id.email);
-
         progressBar = findViewById(R.id.progressBar);
+
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,13 +43,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
 
-
-//
-
-
-
                 String email = emailId.getText().toString();
                 String pwd = password.getText().toString();
+
                 if(email.isEmpty()){
                     emailId.setError("Please enter email id");
                     emailId.requestFocus();
@@ -67,9 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else  if(!(email.isEmpty() && pwd.isEmpty())){
 
-
-
- //creating the username and email
+                //creating the username and email
                     FirebaseAuth.createUserWithEmailAndPassword(email, pwd)
                             .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -78,13 +69,8 @@ public class MainActivity extends AppCompatActivity {
                             if (!task.isSuccessful()) {
                                 //error message
                                 Toast.makeText(MainActivity.this, "SignUp Unsuccessful, Please Try Again", Toast.LENGTH_SHORT).show();
-                            } else {
-
-
-
-
-
-
+                            }
+                            else {
                                 if(task.isSuccessful()){
                                     FirebaseAuth.getCurrentUser().sendEmailVerification()
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -107,15 +93,8 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.makeText(MainActivity.this, task.getException().getMessage(),Toast.LENGTH_LONG).show();
                                 }
 
-
-
-
-
-
-
                                 //code to create user profile in home activity
                                 startActivity(new Intent(MainActivity.this, HomeActivity.class));
-
 
                                 // get the value which input by user in EditText
                                 // and convert it to string
@@ -127,10 +106,8 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("message_key", str);
                                 // start the Intent
                                 startActivity(intent);
-
                             }
                         }
-
                     });
                 }
                 else{

@@ -8,10 +8,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -39,7 +37,6 @@ public class LoginActivity extends AppCompatActivity { EditText emailId, passwor
         registerBt = findViewById(R.id.registerBtn);
         send_text = (EditText) findViewById(R.id.email);
         forgotButton = findViewById(R.id.frgPassword);
-
         progressBar = findViewById(R.id.progressBar);
 
         AuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -56,6 +53,7 @@ public class LoginActivity extends AppCompatActivity { EditText emailId, passwor
                 }
             }
         };
+
 
         loginBt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,8 +85,6 @@ public class LoginActivity extends AppCompatActivity { EditText emailId, passwor
                                 Intent intToHome = new Intent(LoginActivity.this,HomeActivity.class);
                                 startActivity(intToHome);
 
-
-
                                 // get the value which input by user in EditText
                                 // and convert it to string
                                 String str = send_text.getText().toString();
@@ -99,12 +95,10 @@ public class LoginActivity extends AppCompatActivity { EditText emailId, passwor
                                 intent.putExtra("message_key", str);
                                 // start the Intent
                                 startActivity(intent);
-
-
-
                             }
                         }
                     });
+
                 }
                 else{
                     Toast.makeText(LoginActivity.this,"Error Occurred!",Toast.LENGTH_SHORT).show();
@@ -113,6 +107,7 @@ public class LoginActivity extends AppCompatActivity { EditText emailId, passwor
 
             }
         });
+
 
         registerBt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,8 +119,6 @@ public class LoginActivity extends AppCompatActivity { EditText emailId, passwor
         });
 
 
-
-
         forgotButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,15 +128,13 @@ public class LoginActivity extends AppCompatActivity { EditText emailId, passwor
             }
         });
 
-
-
-
-
     }
+
 
     @Override
     protected void onStart() {
         super.onStart();
         FirebaseAuth.addAuthStateListener(AuthStateListener);
     }
+
 }

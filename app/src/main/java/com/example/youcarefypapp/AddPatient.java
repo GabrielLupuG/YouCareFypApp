@@ -2,7 +2,6 @@ package com.example.youcarefypapp;
 
 public class AddPatient {
 
-
     private String name;
     private String dateBirth;
     private String phone;
@@ -10,13 +9,6 @@ public class AddPatient {
 
     public AddPatient() {
     }
-//
-//    public AddPatient(String name, String dateBirth, String phone, String address) {
-//        this.name = name;
-//        this.dateBirth = dateBirth;
-//        this.phone = phone;
-//        this.address = address;
-//    }
 
     public String getName() {
         return name;
