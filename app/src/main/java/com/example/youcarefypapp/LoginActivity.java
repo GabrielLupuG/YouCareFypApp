@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,10 +19,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity { EditText emailId, password;
-    Button btnSignIn;
-    TextView tvSignUp;
+    Button loginBt;
+    TextView registerBt, forgotButton;
     FirebaseAuth FirebaseAuth;
     EditText send_text;
+    ProgressBar progressBar;
 
     private FirebaseAuth.AuthStateListener AuthStateListener;
 
@@ -33,9 +35,12 @@ public class LoginActivity extends AppCompatActivity { EditText emailId, passwor
         FirebaseAuth = FirebaseAuth.getInstance();
         emailId = findViewById(R.id.email);
         password = findViewById(R.id.password);
-        btnSignIn = findViewById(R.id.registerBtn);
-        tvSignUp = findViewById(R.id.loginBtn);
+        loginBt = findViewById(R.id.loginBtn);
+        registerBt = findViewById(R.id.registerBtn);
         send_text = (EditText) findViewById(R.id.email);
+        forgotButton = findViewById(R.id.frgPassword);
+
+        progressBar = findViewById(R.id.progressBar);
 
         AuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -52,9 +57,10 @@ public class LoginActivity extends AppCompatActivity { EditText emailId, passwor
             }
         };
 
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
+        loginBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 String email = emailId.getText().toString();
                 String pwd = password.getText().toString();
                 if(email.isEmpty()){
@@ -73,6 +79,7 @@ public class LoginActivity extends AppCompatActivity { EditText emailId, passwor
                     FirebaseAuth.signInWithEmailAndPassword(email, pwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+                            progressBar.setVisibility(View.GONE);
                             if(!task.isSuccessful()){
                                 Toast.makeText(LoginActivity.this,"Login Error, Please Login Again",Toast.LENGTH_SHORT).show();
                             }
@@ -107,13 +114,31 @@ public class LoginActivity extends AppCompatActivity { EditText emailId, passwor
             }
         });
 
-        tvSignUp.setOnClickListener(new View.OnClickListener() {
+        registerBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 Intent intSignUp = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intSignUp);
             }
         });
+
+
+
+
+        forgotButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                Intent intSignUp = new Intent(LoginActivity.this, ForgotPassword.class);
+                startActivity(intSignUp);
+            }
+        });
+
+
+
+
+
     }
 
     @Override

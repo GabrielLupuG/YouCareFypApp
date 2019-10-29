@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth FirebaseAuth;
     EditText send_text;
 
+    ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,12 +38,19 @@ public class MainActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.loginBtn);
         send_text = (EditText) findViewById(R.id.email);
 
-
+        progressBar = findViewById(R.id.progressBar);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             //on click to verify if email and password are added
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+
+
+//
+
+
+
                 String email = emailId.getText().toString();
                 String pwd = password.getText().toString();
                 if(email.isEmpty()){
@@ -59,18 +69,52 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                    //creating the username and email
-                    FirebaseAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+ //creating the username and email
+                    FirebaseAuth.createUserWithEmailAndPassword(email, pwd)
+                            .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(!task.isSuccessful()){
+                            progressBar.setVisibility(View.GONE);
+                            if (!task.isSuccessful()) {
                                 //error message
-                                Toast.makeText(MainActivity.this,"SignUp Unsuccessful, Please Try Again",Toast.LENGTH_SHORT).show();
-                            }
-                            else {
+                                Toast.makeText(MainActivity.this, "SignUp Unsuccessful, Please Try Again", Toast.LENGTH_SHORT).show();
+                            } else {
+
+
+
+
+
+
+                                if(task.isSuccessful()){
+                                    FirebaseAuth.getCurrentUser().sendEmailVerification()
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if(task.isSuccessful()){
+                                                        Toast.makeText(MainActivity.this,"Registered succesful.Please check your email",
+                                                                Toast.LENGTH_LONG).show();
+                                                        emailId.setText("");
+                                                        password.setText("");
+                                                    }
+                                                    else{
+                                                        Toast.makeText(MainActivity.this, task.getException().getMessage(),
+                                                                Toast.LENGTH_LONG).show();
+                                                    }
+                                                }
+                                            });
+                                }
+                                else{
+                                    Toast.makeText(MainActivity.this, task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                                }
+
+
+
+
+
+
 
                                 //code to create user profile in home activity
-                                startActivity(new Intent(MainActivity.this,HomeActivity.class));
+                                startActivity(new Intent(MainActivity.this, HomeActivity.class));
 
 
                                 // get the value which input by user in EditText
@@ -86,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
                             }
                         }
+
                     });
                 }
                 else{
@@ -97,10 +142,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
         //it go to log in page by clicking on login activity button
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 Intent i = new Intent(MainActivity.this,LoginActivity.class);
                 startActivity(i);
             }

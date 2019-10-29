@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -19,16 +21,19 @@ public class HomeActivity extends AppCompatActivity {
     TextView receiver_msg;
     Button btnSave;
     Button btnLogout;
+    Button delete;
     FirebaseAuth FirebaseAuth;
     EditText namePatient, dateBirthPatient, phonePatient, addressPatient;
 
     DatabaseReference databaseRef;
 
-
-    //new line
-    //FirebaseDatabase database;
+    ProgressBar progressBar;
 
     AddPatient addPatient;
+
+
+    FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
 
 
 
@@ -42,11 +47,25 @@ public class HomeActivity extends AppCompatActivity {
 
         btnLogout = findViewById(R.id.logout);
         btnSave = findViewById(R.id.save);
+        delete = findViewById(R.id.deleteAcc);
 
         namePatient = findViewById(R.id.nameP);
         dateBirthPatient = findViewById(R.id.dateBirthP);
         phonePatient = findViewById(R.id.phoneP);
         addressPatient = findViewById(R.id.addressP);
+
+///////////////////
+
+////        firebaseAuth = FirebaseAuth.getInstance();
+//        firebaseUser = FirebaseAuth.getCurrentUser();
+////
+////
+//        receiver_msg.setText(firebaseUser.getEmail());
+////        //nameP
+
+
+
+        progressBar = findViewById(R.id.progressBar);
 
         addPatient = new AddPatient();
         //reference to AddPatient class
@@ -77,6 +96,7 @@ public class HomeActivity extends AppCompatActivity {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 FirebaseAuth.getInstance().signOut();
                 Intent intToMain = new Intent(HomeActivity.this, MainActivity.class);
                 startActivity(intToMain);
@@ -84,9 +104,24 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                Intent i = new Intent(HomeActivity.this,DeleteAccount.class);
+                startActivity(i);
+            }
+        });
+
+
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //progress bar testing
+                progressBar.setVisibility(View.GONE);
 
                 String name = namePatient.getText().toString();
                 String dateOfB = dateBirthPatient.getText().toString();
@@ -138,17 +173,8 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
-//        public void basicReadWrite () {
-//            // [START write_message]
-//            // Write a message to the database
-//            FirebaseDatabase database = FirebaseDatabase.getInstance();
-//            DatabaseReference myRef = database.getReference("message");
-//
-//            myRef.setValue("Hello, World!");
-//            // [END write_message]
-//
-//            // [START read_message]
-//            // Read from the database
-//        }
+
+
+
     }
 }
