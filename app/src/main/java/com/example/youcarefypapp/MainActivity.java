@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
 
 
+        //register button and check if each field is with value or not
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             //on click to verify if email and password are added
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else  if(!(email.isEmpty() && pwd.isEmpty())){
 
-                //creating the username and email
+                //creating the username and email in firebase authentification
                     FirebaseAuth.createUserWithEmailAndPassword(email, pwd)
                             .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override

@@ -63,7 +63,7 @@ public class HomeActivity extends AppCompatActivity {
         receiver_msg.setText(str);
 
 
-//logout button which is opening home activity page
+        //logout button which is opening home activity page
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

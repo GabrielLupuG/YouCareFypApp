@@ -35,7 +35,7 @@ public class DeleteAccount extends AppCompatActivity {
         firebaseUser = firebaseAuth.getCurrentUser();
         userEm.setText(firebaseUser.getEmail());
 
-
+        //click to go on home activity page
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,6 +45,7 @@ public class DeleteAccount extends AppCompatActivity {
         });
 
 
+        //delete account from firebase with dialog alert button before delete account
         delet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
