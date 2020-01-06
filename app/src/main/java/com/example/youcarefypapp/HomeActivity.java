@@ -2,6 +2,9 @@ package com.example.youcarefypapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,12 +23,18 @@ public class HomeActivity extends AppCompatActivity {
     TextView receiver_msg;
     Button btnSave;
     Button btnLogout;
+    Button btnClear;
     Button delete;
     FirebaseAuth FirebaseAuth;
     EditText namePatient, dateBirthPatient, phonePatient, addressPatient;
     DatabaseReference databaseRef;
     ProgressBar progressBar;
     AddPatient addPatient;
+
+
+    Button bnNext;
+    Button btnView;
+
 
 //    FirebaseAuth firebaseAuth;
 //    FirebaseUser firebaseUser;
@@ -38,7 +47,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
         btnLogout = findViewById(R.id.logout);
+        btnClear = findViewById(R.id.clear);
         btnSave = findViewById(R.id.save);
         delete = findViewById(R.id.deleteAcc);
         namePatient = findViewById(R.id.nameP);
@@ -47,11 +58,14 @@ public class HomeActivity extends AppCompatActivity {
         addressPatient = findViewById(R.id.addressP);
         progressBar = findViewById(R.id.progressBar);
 
+
+        bnNext = findViewById(R.id.next);
+        btnView = findViewById(R.id.View);
+
         addPatient = new AddPatient();
         //reference to AddPatient class
 
         databaseRef= FirebaseDatabase.getInstance().getReference().child("AddPatient");
-
 
         receiver_msg = (TextView) findViewById(R.id.received_value_id);
         // create the get Intent object
@@ -64,25 +78,66 @@ public class HomeActivity extends AppCompatActivity {
 
 
         //logout button which is opening home activity page
-        btnLogout.setOnClickListener(new View.OnClickListener() {
+//        btnLogout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                progressBar.setVisibility(View.VISIBLE);
+//                FirebaseAuth.getInstance().signOut();
+//                Intent intToMain = new Intent(HomeActivity.this, StartActivity.class);
+//                startActivity(intToMain);
+//            }
+//        });
+
+
+
+        bnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                FirebaseAuth.getInstance().signOut();
-                Intent intToMain = new Intent(HomeActivity.this, MainActivity.class);
-                startActivity(intToMain);
+                Intent intToReq = new Intent(HomeActivity.this, Request.class);
+                startActivity(intToReq);
+
             }
         });
 
 
-        delete.setOnClickListener(new View.OnClickListener() {
+        btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                Intent i = new Intent(HomeActivity.this,DeleteAccount.class);
-                startActivity(i);
+                Intent intToReq = new Intent(HomeActivity.this, PatientView.class);
+                startActivity(intToReq);
             }
         });
+
+
+
+
+
+
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String Text = namePatient.getText().toString();
+                namePatient.setText(" ");
+                String Text1 = dateBirthPatient.getText().toString();
+                dateBirthPatient.setText(" ");
+                String Text2 = phonePatient.getText().toString();
+                phonePatient.setText(" ");
+                String Text3 = addressPatient.getText().toString();
+                addressPatient.setText(" ");
+
+            }
+        });
+
+
+//        delete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                progressBar.setVisibility(View.VISIBLE);
+//                Intent i = new Intent(HomeActivity.this,DeleteAccount.class);
+//                startActivity(i);
+//            }
+//        });
 
 
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +158,9 @@ public class HomeActivity extends AppCompatActivity {
                 addPatient.setAddress(address);
 
 
-                databaseRef.push().setValue(addPatient);
+               // databaseRef = databaseRef.child(name);
+                //databaseRef.push().setValue(addPatient);
+                databaseRef.child(name).setValue(addPatient);
                 Toast.makeText(HomeActivity.this, "Data insert successfully!", Toast.LENGTH_SHORT).show();
 
 //                if (name.isEmpty()) {
@@ -136,9 +193,44 @@ public class HomeActivity extends AppCompatActivity {
 //                    //toast error if any error occurred
 //                    Toast.makeText(HomeActivity.this, "Error Occurred!", Toast.LENGTH_SHORT).show();
 //
-//                }
+//
+
+
             }
         });
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if(id==R.id.deleteAcc){
+            Intent myIntent = new Intent (HomeActivity.this,DeleteAccount.class);
+            startActivity(myIntent);
+            return false;
+        }
+        if(id==R.id.goHomePage){
+            Intent myIntent = new Intent (HomeActivity.this,HomeActivity.class);
+            startActivity(myIntent);
+            return false;
+        }
+        if(id==R.id.logout){
+            FirebaseAuth.getInstance().signOut();
+            startActivity( new Intent (HomeActivity.this,StartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            //startActivity(myIntent);
+            return false;
+
+
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

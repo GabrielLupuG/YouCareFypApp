@@ -28,6 +28,8 @@ public class DeleteAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_account);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         userEm= findViewById(R.id.userEmail);
         delet= findViewById(R.id.deleteAcc);
         home = findViewById(R.id.homaPage);
@@ -64,7 +66,7 @@ public class DeleteAccount extends AppCompatActivity {
                                     Toast.makeText(DeleteAccount.this, "Account Deleted", Toast.LENGTH_LONG).show();
 
 
-                                    Intent intToMain = new Intent(DeleteAccount.this, MainActivity.class);
+                                    Intent intToMain = new Intent(DeleteAccount.this, StartActivity.class);
                                     startActivity(intToMain);
                                 }
                                 else {
