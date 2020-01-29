@@ -6,6 +6,7 @@ public class AddPatient {
     private String dateBirth;
     private String phone;
     private String address;
+    private  String  prescription;
 
     public AddPatient() {
     }
@@ -40,5 +41,13 @@ public class AddPatient {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getPrescription() {
+        return prescription;
+    }
+
+    public void setPrescription(String prescription) {
+        this.prescription = prescription;
     }
 }

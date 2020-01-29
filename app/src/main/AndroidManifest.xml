@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".Prescription"></activity>
+        <activity android:name=".SelectPage" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".PatientView" />
         <activity android:name=".Request" />
         <activity android:name=".DeleteAccount" />

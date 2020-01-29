@@ -82,19 +82,21 @@ public class LoginActivity extends AppCompatActivity { EditText emailId, passwor
                                 Toast.makeText(LoginActivity.this,"Login Error, Please Login Again",Toast.LENGTH_SHORT).show();
                             }
                             else{
-                                Intent intToHome = new Intent(LoginActivity.this,HomeActivity.class);
+                                Intent intToHome = new Intent(LoginActivity.this,SelectPage.class);
                                 startActivity(intToHome);
 
                                 // get the value which input by user in EditText
                                 // and convert it to string
                                 String str = send_text.getText().toString();
                                 // Create the Intent object of this class Context() to Second_activity class
-                                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                                Intent intent = new Intent(getApplicationContext(), SelectPage.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 // now by putExtra method put the value in key, value pair
                                 // key is message_key by this key we will receive the value, and put the string
                                 intent.putExtra("message_key", str);
                                 // start the Intent
                                 startActivity(intent);
+                                finish();
                             }
                         }
                     });

@@ -218,7 +218,7 @@ public class HomeActivity extends AppCompatActivity {
             return false;
         }
         if(id==R.id.goHomePage){
-            Intent myIntent = new Intent (HomeActivity.this,HomeActivity.class);
+            Intent myIntent = new Intent (HomeActivity.this,SelectPage.class);
             startActivity(myIntent);
             return false;
         }
