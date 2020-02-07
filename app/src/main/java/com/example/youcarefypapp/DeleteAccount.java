@@ -32,7 +32,7 @@ public class DeleteAccount extends AppCompatActivity {
 
         userEm= findViewById(R.id.userEmail);
         delet= findViewById(R.id.deleteAcc);
-        home = findViewById(R.id.homaPage);
+        home = findViewById(R.id.homePage);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         userEm.setText(firebaseUser.getEmail());
@@ -41,7 +41,7 @@ public class DeleteAccount extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(DeleteAccount.this,HomeActivity.class);
+                Intent i = new Intent(DeleteAccount.this,SelectPage.class);
                 startActivity(i);
             }
         });

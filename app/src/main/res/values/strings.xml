@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">YouCareFypApp</string>
+    <string name="audio_recording">Audio Recording:</string>
+    <string name="when">When:</string>
+    <string name="with">With:</string>
+    <string name="where">Where:</string>
+    <string name="name">Name</string>
+    <string name="location">Location</string>
+    <string name="generate_transcript">Generate Transcript</string>
 
 </resources>

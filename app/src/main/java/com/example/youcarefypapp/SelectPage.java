@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SelectPage extends AppCompatActivity {
 
-    ImageButton btnAddUser, viewList, receipt;
+    ImageButton btnAddUser, viewList, receipt, calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +25,7 @@ public class SelectPage extends AppCompatActivity {
         btnAddUser = findViewById(R.id.addUser);
         viewList = findViewById(R.id.viewListPatient);
         receipt = findViewById(R.id.prescription);
+        calendar=findViewById(R.id.calendar);
 
 
         viewList.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +46,13 @@ public class SelectPage extends AppCompatActivity {
         });
 
 
+        calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intToReq = new Intent(SelectPage.this, Calendar.class);
+                startActivity(intToReq);
+            }
+        });
 
 
         btnAddUser.setOnClickListener(new View.OnClickListener() {
