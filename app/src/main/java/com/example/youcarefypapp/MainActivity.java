@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
         dateOfB = findViewById(R.id.phone);
         phone = findViewById(R.id.phone);
         btnLogin = findViewById(R.id.loginBtn);
-        send_text = (EditText) findViewById(R.id.email);
+        send_text =  findViewById(R.id.email);
         progressBar = findViewById(R.id.progressBar);
 
         FirebaseAuth = FirebaseAuth.getInstance();
@@ -259,6 +259,7 @@ public class MainActivity extends AppCompatActivity {
                             String userid= firebaseUser.getUid();
 
                             String name = user.getText().toString();
+                            //String email = emailId.getText().toString();
 
                             reference = FirebaseDatabase.getInstance().getReference("Doctor").child(name);
 
@@ -281,7 +282,7 @@ public class MainActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     progressBar.setVisibility(View.GONE);
                                     if (task.isSuccessful()){
-                                        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                                        Intent intent = new Intent(MainActivity.this, SelectPage.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                         finish();

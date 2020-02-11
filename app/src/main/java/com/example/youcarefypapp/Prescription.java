@@ -61,7 +61,7 @@ public class Prescription extends AppCompatActivity {
         addPatient = new AddPatient();
         //reference to AddPatient class
 
-        databaseRef= FirebaseDatabase.getInstance().getReference().child("Prescription");
+        databaseRef= FirebaseDatabase.getInstance().getReference("AddPatient").child("Prescription");
 
 
         // create the get Intent object

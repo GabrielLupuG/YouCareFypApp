@@ -65,7 +65,9 @@ public class HomeActivity extends AppCompatActivity {
         addPatient = new AddPatient();
         //reference to AddPatient class
 
-        databaseRef= FirebaseDatabase.getInstance().getReference().child("AddPatient");
+        String name = namePatient.getText().toString();
+
+        databaseRef= FirebaseDatabase.getInstance().getReference("AddPatient").child(name).child("PatientName");
 
         receiver_msg = (TextView) findViewById(R.id.received_value_id);
         // create the get Intent object
