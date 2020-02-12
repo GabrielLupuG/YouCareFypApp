@@ -164,6 +164,8 @@ public class HomeActivity extends AppCompatActivity {
                 //databaseRef.push().setValue(addPatient);
                 databaseRef.child(name).setValue(addPatient);
                 Toast.makeText(HomeActivity.this, "Data insert successfully!", Toast.LENGTH_SHORT).show();
+                Intent myIntent = new Intent (HomeActivity.this,PatientView.class);
+                startActivity(myIntent);
 
 //                if (name.isEmpty()) {
 //                    namePatient.setError("Please enter patient name");

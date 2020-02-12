@@ -7,14 +7,21 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SelectPage extends AppCompatActivity {
 
     ImageButton btnAddUser, viewList, receipt, calendar;
+
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +34,7 @@ public class SelectPage extends AppCompatActivity {
         receipt = findViewById(R.id.prescription);
         calendar=findViewById(R.id.calendar);
 
+        mAuth = FirebaseAuth.getInstance();
 
         viewList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +52,22 @@ public class SelectPage extends AppCompatActivity {
                 startActivity(intToReq);
             }
         });
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    //Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    toastMessage("Successfully signed in with: " + user.getEmail());
+                } else {
+
+                    toastMessage("Successfully signed out.");
+                }
+                // ...
+            }
+        };
 
 
 //        calendar.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +88,12 @@ public class SelectPage extends AppCompatActivity {
             }
         });
     }
+
+    private void toastMessage(String message){
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

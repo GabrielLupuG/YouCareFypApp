@@ -44,7 +44,8 @@ public class LoginActivity extends AppCompatActivity { EditText emailId, passwor
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser FirebaseUser = FirebaseAuth.getCurrentUser();
                 if( FirebaseUser != null ){
-                    Toast.makeText(LoginActivity.this,"You are logged in",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"Successfully signed in with: " + FirebaseUser.getEmail(),Toast.LENGTH_SHORT).show();
+
                     Intent i = new Intent(LoginActivity.this, SelectPage.class);
                     startActivity(i);
                 }
