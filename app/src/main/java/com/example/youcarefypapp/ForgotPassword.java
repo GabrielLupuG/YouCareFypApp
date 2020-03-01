@@ -17,7 +17,7 @@ public class ForgotPassword extends AppCompatActivity {
 
     ProgressBar progressBar;
     EditText userEmail;
-    Button forgotPass , regButton, logPage;
+    Button forgotPass , regButton;
     FirebaseAuth firebaseAuth;
 
     @Override
@@ -30,7 +30,7 @@ public class ForgotPassword extends AppCompatActivity {
         forgotPass=findViewById(R.id.frgPass);
         firebaseAuth=FirebaseAuth.getInstance();
         regButton=findViewById(R.id.registerPage);
-        logPage=findViewById(R.id.toLogin);
+
 
         forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +42,8 @@ public class ForgotPassword extends AppCompatActivity {
                                 if (task.isSuccessful()){
                                     progressBar.setVisibility(View.GONE);
                                     Toast.makeText(ForgotPassword.this,"Password sent to your email",Toast.LENGTH_LONG).show();
+                                    Intent i = new Intent(ForgotPassword.this,LoginActivity.class);
+                                    startActivity(i);
                                 }
                                 else {
                                     progressBar.setVisibility(View.VISIBLE);
@@ -64,14 +66,7 @@ public class ForgotPassword extends AppCompatActivity {
         });
 
 
-        logPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                Intent i = new Intent(ForgotPassword.this,LoginActivity.class);
-                startActivity(i);
-            }
-        });
+
 
 
     }

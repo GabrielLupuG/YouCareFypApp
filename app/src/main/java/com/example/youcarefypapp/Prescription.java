@@ -61,7 +61,7 @@ public class Prescription extends AppCompatActivity {
         addPatient = new AddPatient();
         //reference to AddPatient class
 
-        databaseRef= FirebaseDatabase.getInstance().getReference("AddPatient").child("Prescription");
+        databaseRef= FirebaseDatabase.getInstance().getReference().child("Prescription");
 
 
         // create the get Intent object
@@ -91,9 +91,12 @@ public class Prescription extends AppCompatActivity {
 
 
                 // databaseRef = databaseRef.child(name);
-                //databaseRef.push().setValue(addPatient);
-                databaseRef.child(name).setValue(addPatient);
+                databaseRef.push().setValue(addPatient);
+                //databaseRef.child(name).setValue(addPatient);
                 Toast.makeText(Prescription.this, "Data insert successfully!", Toast.LENGTH_SHORT).show();
+
+                Intent myIntent = new Intent (Prescription.this,SelectPage.class);
+                startActivity(myIntent);
             }
         });
 

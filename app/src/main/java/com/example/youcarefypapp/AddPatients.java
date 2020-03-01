@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class HomeActivity extends AppCompatActivity {
+public class AddPatients extends AppCompatActivity {
 
     TextView receiver_msg;
     Button btnSave;
@@ -45,7 +45,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.add_patients);
 
 
         btnLogout = findViewById(R.id.logout);
@@ -67,7 +67,9 @@ public class HomeActivity extends AppCompatActivity {
 
         String name = namePatient.getText().toString();
 
-        databaseRef= FirebaseDatabase.getInstance().getReference("AddPatient").child(name).child("PatientName");
+
+
+        databaseRef= FirebaseDatabase.getInstance().getReference().child("AddPatient");
 
         receiver_msg = (TextView) findViewById(R.id.received_value_id);
         // create the get Intent object
@@ -95,7 +97,7 @@ public class HomeActivity extends AppCompatActivity {
         bnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intToReq = new Intent(HomeActivity.this, Request.class);
+                Intent intToReq = new Intent(AddPatients.this, Request.class);
                 startActivity(intToReq);
 
             }
@@ -105,7 +107,7 @@ public class HomeActivity extends AppCompatActivity {
         btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intToReq = new Intent(HomeActivity.this, PatientView.class);
+                Intent intToReq = new Intent(AddPatients.this, PatientView.class);
                 startActivity(intToReq);
             }
         });
@@ -161,10 +163,10 @@ public class HomeActivity extends AppCompatActivity {
 
 
                // databaseRef = databaseRef.child(name);
-                //databaseRef.push().setValue(addPatient);
-                databaseRef.child(name).setValue(addPatient);
-                Toast.makeText(HomeActivity.this, "Data insert successfully!", Toast.LENGTH_SHORT).show();
-                Intent myIntent = new Intent (HomeActivity.this,PatientView.class);
+                databaseRef.push().setValue(addPatient);
+                ///databaseRef.child(name).setValue(addPatient);
+                Toast.makeText(AddPatients.this, "Data insert successfully!", Toast.LENGTH_SHORT).show();
+                Intent myIntent = new Intent (AddPatients.this,PatientView.class);
                 startActivity(myIntent);
 
 //                if (name.isEmpty()) {
@@ -217,18 +219,18 @@ public class HomeActivity extends AppCompatActivity {
 
         int id = item.getItemId();
         if(id==R.id.deleteAcc){
-            Intent myIntent = new Intent (HomeActivity.this,DeleteAccount.class);
+            Intent myIntent = new Intent (AddPatients.this,DeleteAccount.class);
             startActivity(myIntent);
             return false;
         }
         if(id==R.id.goHomePage){
-            Intent myIntent = new Intent (HomeActivity.this,SelectPage.class);
+            Intent myIntent = new Intent (AddPatients.this,SelectPage.class);
             startActivity(myIntent);
             return false;
         }
         if(id==R.id.logout){
             FirebaseAuth.getInstance().signOut();
-            startActivity( new Intent (HomeActivity.this,StartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            startActivity( new Intent (AddPatients.this,StartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             //startActivity(myIntent);
             return false;
 

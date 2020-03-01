@@ -210,13 +210,13 @@ public class MainActivity extends AppCompatActivity {
                     register(txtUsername, txtEmail,txtPassword, txtDate, txtPhon);
 
                     //  code to create user profile in home activity
-                    startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                    startActivity(new Intent(MainActivity.this, SelectPage.class));
 
                     // get the value which input by user in EditText
                     // and convert it to string
                     String str = send_text.getText().toString();
                     // Create the Intent object of this class Context() to Second_activity class
-                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), SelectPage.class);
                     // now by putExtra method put the value in key, value pair
                     // key is message_key by this key we will receive the value, and put the string
                     intent.putExtra("message_key", str);
@@ -258,10 +258,10 @@ public class MainActivity extends AppCompatActivity {
                             FirebaseUser firebaseUser=FirebaseAuth.getCurrentUser();
                             String userid= firebaseUser.getUid();
 
-                            String name = user.getText().toString();
+                           // String name = user.getText().toString();
                             //String email = emailId.getText().toString();
 
-                            reference = FirebaseDatabase.getInstance().getReference("Doctor").child(name);
+                            reference = FirebaseDatabase.getInstance().getReference("Doctor").child(userid);
 
 
 

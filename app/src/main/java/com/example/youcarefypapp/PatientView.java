@@ -24,21 +24,20 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-/**
- * Created by User on 2/8/2017.
- */
-
 public class PatientView extends AppCompatActivity {
     private static final String TAG = "ViewDatabase";
 
     //add Firebase Database stuff
-    private FirebaseDatabase mFirebaseDatabase;
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private DatabaseReference myRef;
-    private  String userID;
+     FirebaseDatabase mFirebaseDatabase;
+     FirebaseAuth mAuth;
+     FirebaseAuth.AuthStateListener mAuthListener;
+     DatabaseReference myRef;
+      String userID;
 
-    private ListView mListView;
+     ListView mListView;
+
+     ArrayList<AddPatient> list;
+     ArrayAdapter<AddPatient>adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,7 +50,7 @@ public class PatientView extends AppCompatActivity {
         //NOTE: Unless you are signed in, this will not be useable.
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference();
+        myRef = mFirebaseDatabase.getReference("AddPatient");
         FirebaseUser user = mAuth.getCurrentUser();
         userID = user.getUid();
 
@@ -62,7 +61,7 @@ public class PatientView extends AppCompatActivity {
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    toastMessage("Successfully signed in with: " + user.getEmail());
+                   //toastMessage("Successfully signed in with: " + user.getEmail());
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -77,7 +76,8 @@ public class PatientView extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-               // showData(dataSnapshot);
+              //  showData(dataSnapshot);
+
             }
 
             @Override
@@ -88,29 +88,29 @@ public class PatientView extends AppCompatActivity {
 
     }
 
-    private void showData(DataSnapshot dataSnapshot) {
-        for(DataSnapshot ds : dataSnapshot.getChildren()){
-            AddPatient uInfo = new AddPatient();
-            uInfo.setName(ds.child(userID).getValue(AddPatient.class).getName()); //set the name
-            uInfo.setDateBirth(ds.child(userID).getValue(AddPatient.class).getDateBirth()); //set the date of birth
-            uInfo.setPhone(ds.child(userID).getValue(AddPatient.class).getPhone()); //set the phone_num
-            uInfo.setAddress(ds.child(userID).getValue(AddPatient.class).getAddress());
-
-            //display all the information
-            Log.d(TAG, "showData: name: " + uInfo.getName());
-            Log.d(TAG, "showData: dateOfBirth: " + uInfo.getDateBirth());
-            Log.d(TAG, "showData: phone_num: " + uInfo.getPhone());
-            Log.d(TAG, "showData: address" + uInfo.getAddress());
-
-            ArrayList<String> array  = new ArrayList<>();
-            array.add(uInfo.getName());
-            array.add(uInfo.getDateBirth());
-            array.add(uInfo.getPhone());
-            array.add(uInfo.getAddress());
-            ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,array);
-            mListView.setAdapter(adapter);
-        }
-    }
+//    private void showData(DataSnapshot dataSnapshot) {
+//        for(DataSnapshot ds : dataSnapshot.getChildren()){
+//            AddPatient uInfo = new AddPatient();
+//            uInfo.setName(ds.child(userID).getValue(AddPatient.class).getName());
+//            uInfo.setAddress(ds.child(userID).getValue(AddPatient.class).getAddress());
+//            uInfo.setDateBirth(ds.child(userID).getValue(AddPatient.class).getDateBirth());
+//            uInfo.setPhone(ds.child(userID).getValue(AddPatient.class).getPhone());
+//
+//            //display all the information
+//            Log.d(TAG, "showData: name: " + uInfo.getName());
+//            Log.d(TAG, "showData: email: " + uInfo.getAddress());
+//            Log.d(TAG, "showData: phone_num: " + uInfo.getDateBirth());
+//            Log.d(TAG, "showData: phone_num: " + uInfo.getPhone());
+//
+//            ArrayList<String> array  = new ArrayList<>();
+//            array.add(uInfo.getName());
+//            array.add(uInfo.getAddress());
+//            array.add(uInfo.getDateBirth());
+//            array.add(uInfo.getPhone());
+//            ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,array);
+//            mListView.setAdapter(adapter);
+//        }
+//    }
 
     @Override
     public void onStart() {
@@ -127,14 +127,10 @@ public class PatientView extends AppCompatActivity {
     }
 
 
-    /**
-     * customizable toast
-     * @param message
-     */
+
     private void toastMessage(String message){
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -167,5 +163,4 @@ public class PatientView extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

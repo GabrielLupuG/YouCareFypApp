@@ -38,7 +38,7 @@ public class Request extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.add_patients);
 
 
         btnLogout = findViewById(R.id.logout);
@@ -142,7 +142,7 @@ public class Request extends AppCompatActivity {
             return false;
         }
         if(id==R.id.goHomePage){
-            Intent myIntent = new Intent (Request.this,HomeActivity.class);
+            Intent myIntent = new Intent (Request.this, AddPatients.class);
             startActivity(myIntent);
             return false;
         }

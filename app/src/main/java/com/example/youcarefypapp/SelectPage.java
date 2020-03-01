@@ -70,19 +70,19 @@ public class SelectPage extends AppCompatActivity {
         };
 
 
-//        calendar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intToReq = new Intent(SelectPage.this, CalendarActivity.class);
-//                startActivity(intToReq);
-//            }
-//        });
+        calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intToReq = new Intent(SelectPage.this, Calendar.class);
+                startActivity(intToReq);
+            }
+        });
 
 
         btnAddUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intToReq = new Intent(SelectPage.this, HomeActivity.class);
+                Intent intToReq = new Intent(SelectPage.this, AddPatients.class);
                 startActivity(intToReq);
 
             }
