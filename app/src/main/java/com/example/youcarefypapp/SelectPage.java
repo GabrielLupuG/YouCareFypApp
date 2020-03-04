@@ -119,10 +119,13 @@ public class SelectPage extends AppCompatActivity {
             startActivity( new Intent (SelectPage.this,StartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             //startActivity(myIntent);
             return false;
-
-
-
         }
+        if(id==R.id.calendar){
+            Intent myIntent = new Intent (SelectPage.this,Calendar.class);
+            startActivity(myIntent);
+            return false;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }

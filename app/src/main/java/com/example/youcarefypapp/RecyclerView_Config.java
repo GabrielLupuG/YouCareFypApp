@@ -6,6 +6,7 @@
 //import android.widget.TextView;
 //
 //import androidx.annotation.NonNull;
+//import androidx.recyclerview.widget.LinearLayoutManager;
 //import androidx.recyclerview.widget.RecyclerView;
 //
 //import java.util.List;
@@ -15,11 +16,11 @@
 //    private  PatientAdapter mPatientAdapter;
 //    private List<AddPatient> addPatients;
 //
-//    public void setConfig(RecyclerView recyclerView, Context context, List<AddPatient> patient, List<String> keys){
+//    public void setConfig(RecyclerView recyclerView, com.example.youcarefypapp.PatientView patientView, List<AddPatient> patient, List<String> keys){
 //
 //        mContext = context;
 //        mPatientAdapter = new PatientAdapter(addPatients, keys);
-//        //recyclerView.setLayoutManager(new LinearLayoutManager(context));
+//        recyclerView.setLayoutManager(new LinearLayoutManager(context));
 //        recyclerView.setAdapter(mPatientAdapter);
 //    }
 //

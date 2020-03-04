@@ -25,7 +25,7 @@
 //
 //    public FirebaseDatabaseHelper() {
 //        mDatabase = FirebaseDatabase.getInstance();
-//        mReferencePatient = mDatabase.getReference("PatientName");
+//        mReferencePatient = mDatabase.getReference("AddPatient");
 //    }
 //
 //    public void readPatients(final DataStatus dataStatus){

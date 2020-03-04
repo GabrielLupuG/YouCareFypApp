@@ -1,5 +1,6 @@
 package com.example.youcarefypapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 
 public class PatientView extends AppCompatActivity {
     private static final String TAG = "ViewDatabase";
+    //private RecyclerView recyclerView;
 
     //add Firebase Database stuff
      FirebaseDatabase mFirebaseDatabase;
@@ -39,6 +41,7 @@ public class PatientView extends AppCompatActivity {
      ArrayList<AddPatient> list;
      ArrayAdapter<AddPatient>adapter;
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,33 @@ public class PatientView extends AppCompatActivity {
         myRef = mFirebaseDatabase.getReference("AddPatient");
         FirebaseUser user = mAuth.getCurrentUser();
         userID = user.getUid();
+        //recyclerView = (RecyclerView) findViewById(R.id.listview);
+
+
+//
+//        new FirebaseDatabaseHelper().readPatients(new FirebaseDatabaseHelper.DataStatus() {
+//            @Override
+//            public void DataIsLoaded(List<AddPatient> patient, List<String> keys) {
+//                new RecyclerView_Config().setConfig(recyclerView, PatientView.this, patient,keys);
+//            }
+//
+//            @Override
+//            public void DataIsInserted() {
+//
+//            }
+//
+//            @Override
+//            public void DataIsUpdated() {
+//
+//            }
+//
+//            @Override
+//            public void DataIsDeleted() {
+//
+//            }
+//        });
+//
+
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override

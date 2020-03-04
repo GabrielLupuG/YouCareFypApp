@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,20 +19,12 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class AddPatients extends AppCompatActivity {
 
-    TextView receiver_msg;
-    Button btnSave;
-    Button btnLogout;
-    Button btnClear;
-    Button delete;
+    Button btnSave,btnView,delete,btnClear,btnLogout;
     FirebaseAuth FirebaseAuth;
     EditText namePatient, dateBirthPatient, phonePatient, addressPatient;
     DatabaseReference databaseRef;
     ProgressBar progressBar;
     AddPatient addPatient;
-
-
-    Button bnNext;
-    Button btnView;
 
 
 //    FirebaseAuth firebaseAuth;
@@ -58,8 +49,6 @@ public class AddPatients extends AppCompatActivity {
         addressPatient = findViewById(R.id.addressP);
         progressBar = findViewById(R.id.progressBar);
 
-
-        bnNext = findViewById(R.id.next);
         btnView = findViewById(R.id.View);
 
         addPatient = new AddPatient();
@@ -71,38 +60,14 @@ public class AddPatients extends AppCompatActivity {
 
         databaseRef= FirebaseDatabase.getInstance().getReference().child("AddPatient");
 
-        receiver_msg = (TextView) findViewById(R.id.received_value_id);
+      //  receiver_msg = (TextView) findViewById(R.id.received_value_id);
         // create the get Intent object
         Intent intent = getIntent();
         // receive the value by getStringExtra() method
         // and key must be same which is send by first activity
-        String str = intent.getStringExtra("message_key");
-        // display the string into textView
-        receiver_msg.setText(str);
-
-
-        //logout button which is opening home activity page
-//        btnLogout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                progressBar.setVisibility(View.VISIBLE);
-//                FirebaseAuth.getInstance().signOut();
-//                Intent intToMain = new Intent(HomeActivity.this, StartActivity.class);
-//                startActivity(intToMain);
-//            }
-//        });
-
-
-
-        bnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intToReq = new Intent(AddPatients.this, Request.class);
-                startActivity(intToReq);
-
-            }
-        });
-
+//        String str = intent.getStringExtra("message_key");
+//        // display the string into textView
+//        receiver_msg.setText(str);
 
         btnView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,10 +76,6 @@ public class AddPatients extends AppCompatActivity {
                 startActivity(intToReq);
             }
         });
-
-
-
-
 
 
         btnClear.setOnClickListener(new View.OnClickListener() {
@@ -132,16 +93,6 @@ public class AddPatients extends AppCompatActivity {
 
             }
         });
-
-
-//        delete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                progressBar.setVisibility(View.VISIBLE);
-//                Intent i = new Intent(HomeActivity.this,DeleteAccount.class);
-//                startActivity(i);
-//            }
-//        });
 
 
         btnSave.setOnClickListener(new View.OnClickListener() {
