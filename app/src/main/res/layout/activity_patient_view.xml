@@ -7,13 +7,13 @@
     <TextView
         android:textAlignment="center"
         android:textSize="25sp"
-        android:text="List View Of Patients"
+        android:text="@string/list_view_of_patients"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tvUserInfo"/>
 
-    <ListView
-        android:id="@+id/listview"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

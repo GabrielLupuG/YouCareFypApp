@@ -7,5 +7,6 @@
     <string name="name">Name</string>
     <string name="location">Location</string>
     <string name="generate_transcript">Generate Transcript</string>
+    <string name="list_view_of_patients">List View Of Patients</string>
 
 </resources>
